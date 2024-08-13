@@ -1,0 +1,21 @@
+name: "Run linting and tests"
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ubuntu:focal
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 16.x
+    - run: npm i -g npm@9
+    - run: npm ci
+    - run: npm run lint-check
+    - run: npm run -- clean-handler
+    - run: npm run compile
+    - run: npm run -- docs --treatWarningsAsErrors

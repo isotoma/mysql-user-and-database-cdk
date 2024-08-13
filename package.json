@@ -1,0 +1,70 @@
+{
+    "name": "mysql-user-and-database-cdk",
+    "version": "1.1.2",
+    "description": "",
+    "license": "MIT",
+    "author": {
+        "name": "Isotoma Limited",
+        "email": "hello@isotoma.com",
+        "url": "https://isotoma.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/isotoma/mysql-user-and-database-cdk"
+    },
+    "keywords": [
+        "cdk",
+        "rds",
+        "aws",
+        "mysql",
+        "maria",
+        "maria-db",
+        "database"
+    ],
+    "scripts": {
+        "test": "jest",
+        "tsc": "tsc",
+        "clean": "rm -rf build/",
+        "compile": "npm run clean && npm run -- tsc --outDir build/ && npm run compile-handler && cp -R ./handler/build/ ./build/handler/ && npm run compile-latest-secret-version-handler && cp -R ./latest_secret_version_handler/build/ ./build/latest_secret_version_handler/ && cp package.json README.md ./build/",
+        "version": "auto-changelog --hide-credit -p && git add CHANGELOG.md",
+        "_lint": "eslint 'index.ts' 'test/**/*.ts' 'handler/**/*.ts' jest.config.js",
+        "lint": "npm run -- _lint --fix",
+        "lint-check": "npm run -- _lint --max-warnings 0",
+        "clean-handler": "rm -rf handler/build/",
+        "esbuild": "esbuild",
+        "compile-handler": "npm run clean-handler && mkdir -p handler/build/ && npm run -- esbuild --platform=node --target=node16 --minify-syntax --external:aws-sdk --bundle --outdir=./handler/build ./handler/main.ts",
+        "clean-latest-secret-version-handler": "rm -rf latest_secret_version_handler/build/",
+        "compile-latest-secret-version-handler": "npm run clean-latest-secret-version-handler && mkdir -p ./latest_secret_version_handler/build && npm run -- esbuild --platform=node --target=node16 --minify-syntax --external:aws-sdk --bundle --outdir=./latest_secret_version_handler/build ./latest_secret_version_handler/main.ts",
+        "clean-handlers": "npm run clean-handler && npm run clean-latest-secret-version-handler",
+        "compile-handlers": "npm run compile-handler && npm run compile-latest-secret-version-handler",
+        "docs": "typedoc index.ts --includeVersion"
+    },
+    "peerDependencies": {
+        "aws-cdk-lib": "^2.0.0",
+        "constructs": "^10.0.0"
+    },
+    "devDependencies": {
+        "@aws-sdk/client-secrets-manager": "^3.477.0",
+        "@types/jest": "^29.5.11",
+        "@types/node": "^14.14.31",
+        "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@typescript-eslint/parser": "^5.0.0",
+        "auto-changelog": "^2.3.0",
+        "aws-cdk-lib": "^2.15.0",
+        "aws-sdk": "^2.1025.0",
+        "constructs": "^10.0.0",
+        "esbuild": "^0.19.11",
+        "eslint": "^8.0.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "jest": "^29.7.0",
+        "prettier": "^2.4.1",
+        "ts-jest": "^29.1.1",
+        "typedoc": "^0.25.4",
+        "typescript": "^5.3.3",
+        "zod": "^3.22.4"
+    },
+    "dependencies": {
+        "mysql2": "^3.11.0"
+    }
+}
