@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### [1.1.0](https://github.com/isotoma/mysql-user-and-database-cdk/compare/1.0.1...1.1.0)
+
+- Upgrade Lambda runtime from 18 to 22 [`#6`](https://github.com/isotoma/mysql-user-and-database-cdk/pull/6)
+
 #### [1.0.1](https://github.com/isotoma/mysql-user-and-database-cdk/compare/1.0.0...1.0.1)
+
+> 30 October 2024
 
 - Fix to handle special characters in username and database name [`#1`](https://github.com/isotoma/mysql-user-and-database-cdk/pull/1)
 
